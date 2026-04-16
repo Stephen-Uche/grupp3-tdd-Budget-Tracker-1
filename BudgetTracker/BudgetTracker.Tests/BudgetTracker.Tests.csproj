@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BudgetTracker.Api\BudgetTracker.Api.csproj" />
+    <ProjectReference Include="..\BudgetTracker.Web\BudgetTracker.Web.csproj" />
     <ProjectReference Include="..\BudgetTracker.Core\BudgetTracker.Core.csproj" />
   </ItemGroup>
 

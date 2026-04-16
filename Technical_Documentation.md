@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Purpose:** BudgetTracker is an ASP.NET Core solution that tracks accounts, transactions, categories, and budgets, and exposes both a Web UI and a REST API. It also provides AI-based saving advice using the 1minAI API.
+**Purpose:** BudgetTracker is an ASP.NET Core solution that tracks accounts, transactions, categories, and budgets. The Web application serves both the Razor UI and the REST API routes from one host. It also provides AI-based saving advice using the 1minAI API.
 
 **Key Capabilities:**
 
@@ -13,7 +13,7 @@
 
 **Tech Stack:**
 
-- .NET 10, ASP.NET Core MVC + Web API
+- .NET 10, ASP.NET Core MVC + attribute-routed API controllers
 - EF Core with SQLite
 - Repository + Service layers
 - Typed HttpClient for AI integration
@@ -23,7 +23,7 @@
 
 ## High-Level Architecture
 
-`Browser -> Web Controllers -> Services -> (Repositories -> DbContext) -> SQLite`
+`Browser/API Client -> Web Controllers -> Services -> (Repositories -> DbContext) -> SQLite`
 `                               |`
 `                               -> InsightsService -> IGeminiClient (1minAI)`
 
@@ -31,7 +31,7 @@
 
 | Layer | Key Types | Responsibilities |
 | --- | --- | --- |
-| **Presentation** | `HomeController`, Razor Views, API Controllers | Handle user input and API requests, return views/JSON |
+| **Presentation** | `HomeController`, Razor Views, API Controllers in `BudgetTracker.Web` | Handle user input and API requests, return views/JSON |
 | **Application** | `AccountService`, `TransactionService`, `BudgetService`, `DashboardService`, `InsightsService` | Orchestrate domain logic, validation, and caching |
 | **Integration** | `GeminiClient` (1minAI), `IGeminiClient` | AI HTTP calls (create conversation, send prompt), parse JSON |
 | **Persistence** | `BudgetTrackerDbContext`, EF repositories | Read/write entities, enforce unique constraints |
@@ -93,16 +93,10 @@ export ONEMINAI_MODEL="gpt-4o-mini"
 
 ## Running Locally
 
-Web UI:
+Web UI and API:
 
 ```bash
 dotnet run --project BudgetTracker/BudgetTracker.Web
-```
-
-API:
-
-```bash
-dotnet run --project BudgetTracker/BudgetTracker.Api
 ```
 
 ---

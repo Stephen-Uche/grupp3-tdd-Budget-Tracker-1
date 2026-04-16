@@ -9,15 +9,13 @@
 BudgetTracker är en personlig budgetapplikation byggd i .NET med fokus på **TDD**, tydlig arkitektur och separation av ansvar.  
 Projektet består av ett Core-lager, ett REST-API och ett MVC-baserat webbgränssnitt.
 
-## Projektstruktur
-- **BudgetTracker.Core** – Domänmodeller, DTO:er, repositories och services  
-- **BudgetTracker.Api** – REST API for accounts, transactions, categories, budgets, reports, and dashboard. 
-- **BudgetTracker.Web** – MVC-baserat webbgränssnitt  with account and Gemini advice experiences.
-- **BudgetTracker.Tests** – Tester (TDD)
+## Projects
 
-## Setup instruktioner
+- `BudgetTracker.Core` - Domain, DTOs, repositories, and services.
+- `BudgetTracker.Web` - MVC UI plus REST API endpoints for accounts, transactions, categories, budgets, reports, and dashboard.
 
-### Krav
+## Requirements
+
 - .NET 10 SDK
 - SQLite
 
@@ -37,52 +35,25 @@ $env:ONEMINAI_MODEL="gpt-4o-mini"
 ```
 `appsettings.json` contains the default SQLite connection string.
 
+## Run the Web UI and API
 
-### Kör API
-```bash
-dotnet run --project BudgetTracker.Api
-```
-
-### Kör Web
 ```bash
 dotnet run --project BudgetTracker.Web
 ```
 
-## API Endpoints (översikt)
+The API exposes endpoints under `/api` from the same Web host.
 
-### Budgets
-- POST `/api/budgets`
-- GET `/api/budgets?month=YYYY-MM`
-- PUT `/api/budgets/{id}`
-- DELETE `/api/budgets/{id}`
+## Migrations
 
-### Transactions
-- POST `/api/transactions`
-- GET `/api/transactions`
-- GET `/api/transactions/{id}`
-- PUT `/api/transactions/{id}`
-- DELETE `/api/transactions/{id}`
+Migrations live in `BudgetTracker.Core`. To add and apply migrations:
 
-### Dashboard
-- GET `/api/dashboard?year={year}&month={month}`
+```bash
+dotnet ef migrations add <Name> -p BudgetTracker.Core -s BudgetTracker.Web
+dotnet ef database update -p BudgetTracker.Core -s BudgetTracker.Web
+```
 
-## Swagger / OpenAPI
-Swagger och OpenAPI är aktiverat i **Development**.
+## Tests
 
-- Swagger UI: `/swagger`
-- OpenAPI JSON: `/swagger/v1/swagger.json`
-- Scalar API Reference: `/scalar/v1`
-
-## Databas
-SQLite via Entity Framework Core.
-
-Tabeller:
-- Accounts (unika namn)
-- Categories (unika namn)
-- Transactions
-- Budgets (unik per Category + Month)
-
-## Tester
 ```bash
 dotnet test BudgetTracker.Tests/BudgetTracker.Tests.csproj
 ```

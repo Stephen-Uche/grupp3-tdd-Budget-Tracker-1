@@ -18,7 +18,7 @@ public sealed class SqliteInMemoryFixture : IAsyncLifetime
     public async Task InitializeAsync()
     {
         await _connection.OpenAsync();
-        Factory = new ApiWebApplicationFactory(_connection);
+        Factory = new WebAppFactory(_connection);
 
         // ✅ Skapa schema exakt en gång per fixture
         using var scope = Factory.Services.CreateScope();
@@ -35,11 +35,11 @@ public sealed class SqliteInMemoryFixture : IAsyncLifetime
         return Task.CompletedTask;
     }
 
-    private sealed class ApiWebApplicationFactory : WebApplicationFactory<global::Program>
+    private sealed class WebAppFactory : WebApplicationFactory<global::Program>
     {
         private readonly DbConnection _connection;
 
-        public ApiWebApplicationFactory(DbConnection connection) => _connection = connection;
+        public WebAppFactory(DbConnection connection) => _connection = connection;
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
