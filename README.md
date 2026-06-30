@@ -7,7 +7,7 @@
 
 ## Profile
 
-**Project:** Budget Tracker  
+**Project:** Budget Tracker-2  
 **Team:** Grupp 3  
 **Focus:** Test-driven development, clean architecture, and practical budget management  
 **Goal:** Build a personal budget application with a maintainable Core layer, REST API, MVC web interface, and automated tests.
