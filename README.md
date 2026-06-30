@@ -5,8 +5,6 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-green)
 ![.NET Build & Test](https://github.com/Stephen-Uche/grupp3-tdd-Budget-Tracker-1/actions/workflows/dotnet-desktop.yml/badge.svg)
 
-)
-
 ## Projektbeskrivning
 BudgetTracker är en personlig budgetapplikation byggd i .NET med fokus på **TDD**, tydlig arkitektur och separation av ansvar.  
 Projektet består av ett Core-lager, ett REST-API och ett MVC-baserat webbgränssnitt.
