@@ -93,10 +93,16 @@ export ONEMINAI_MODEL="gpt-4o-mini"
 
 ## Running Locally
 
-Web UI and API:
+Web UI:
 
 ```bash
-dotnet run --project BudgetTracker/BudgetTracker.Web
+dotnet run --project src/BudgetTracker.Web/BudgetTracker.Web.csproj
+```
+
+API:
+
+```bash
+dotnet run --project src/BudgetTracker.Api/BudgetTracker.Api.csproj
 ```
 
 ---
@@ -104,5 +110,5 @@ dotnet run --project BudgetTracker/BudgetTracker.Web
 ## Tests
 
 ```bash
-dotnet test BudgetTracker/BudgetTracker.Tests/BudgetTracker.Tests.csproj
+dotnet test tests/BudgetTracker.Test/BudgetTracker.Test.csproj
 ```

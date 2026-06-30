@@ -48,26 +48,39 @@ BudgetTracker helps users organize accounts, categories, transactions, budgets, 
 ## Project Structure
 
 ```text
-BudgetTracker/
 ├── BudgetTracker.sln
-├── BudgetTracker.Core/
-│   ├── Clients/
-│   ├── Data/
-│   ├── Domain/
-│   ├── Dtos/
-│   ├── Migrations/
-│   ├── Repositories/
-│   └── Services/
-├── BudgetTracker.Web/
-│   ├── Controllers/
-│   ├── Models/
-│   ├── Views/
-│   ├── wwwroot/
-│   └── Program.cs
-└── BudgetTracker.Tests/
-    ├── Integration/
-    └── Unit/
+├── src/
+│   ├── BudgetTracker.Api/
+│   │   ├── Controllers/
+│   │   └── Program.cs
+│   ├── BudgetTracker.Core/
+│   │   ├── Clients/
+│   │   ├── Data/
+│   │   ├── Domain/
+│   │   ├── Dtos/
+│   │   ├── Migrations/
+│   │   ├── Repositories/
+│   │   └── Services/
+│   └── BudgetTracker.Web/
+│       ├── Controllers/
+│       ├── Models/
+│       ├── Views/
+│       ├── wwwroot/
+│       └── Program.cs
+└── tests/
+    └── BudgetTracker.Test/
+        ├── Integration/
+        └── Unit/
 ```
+
+---
+
+## Projects
+
+- `src/BudgetTracker.Api` - REST API endpoints for accounts, categories, transactions, budgets, reports, and dashboard data.
+- `src/BudgetTracker.Core` - Domain models, DTOs, repositories, services, EF Core DbContext, migrations, and clients.
+- `src/BudgetTracker.Web` - MVC web interface.
+- `tests/BudgetTracker.Test` - Unit and integration tests.
 
 ---
 
@@ -83,7 +96,7 @@ BudgetTracker/
 The default SQLite connection string is configured in:
 
 ```text
-BudgetTracker/BudgetTracker.Web/appsettings.json
+src/BudgetTracker.Api/appsettings.json
 ```
 
 Optional 1minAI configuration can be set with environment variables:
@@ -107,20 +120,24 @@ $env:ONEMINAI_MODEL="gpt-4o-mini"
 From the repository root:
 
 ```bash
-dotnet run --project BudgetTracker/BudgetTracker.Web/BudgetTracker.Web.csproj
+dotnet run --project src/BudgetTracker.Web/BudgetTracker.Web.csproj
 ```
 
-The MVC web app and API run from the same ASP.NET Core host. API endpoints are exposed under `/api`.
+Run the REST API:
+
+```bash
+dotnet run --project src/BudgetTracker.Api/BudgetTracker.Api.csproj
+```
 
 ---
 
 ## Database Migrations
 
-Migrations live in `BudgetTracker.Core`. From the `BudgetTracker` folder:
+Migrations live in `BudgetTracker.Core`. From the repository root:
 
 ```bash
-dotnet ef migrations add <Name> -p BudgetTracker.Core -s BudgetTracker.Web
-dotnet ef database update -p BudgetTracker.Core -s BudgetTracker.Web
+dotnet ef migrations add <Name> -p src/BudgetTracker.Core -s src/BudgetTracker.Api
+dotnet ef database update -p src/BudgetTracker.Core -s src/BudgetTracker.Api
 ```
 
 In development, the app applies migrations and seeds default data at startup.
@@ -132,19 +149,19 @@ In development, the app applies migrations and seeds default data at startup.
 From the repository root:
 
 ```bash
-dotnet test BudgetTracker/BudgetTracker.Tests/BudgetTracker.Tests.csproj
+dotnet test tests/BudgetTracker.Test/BudgetTracker.Test.csproj
 ```
 
 Run the full solution:
 
 ```bash
-dotnet test BudgetTracker/BudgetTracker.sln
+dotnet test BudgetTracker.sln
 ```
 
 Run tests with coverage:
 
 ```bash
-dotnet test BudgetTracker/BudgetTracker.Tests/BudgetTracker.Tests.csproj --collect:"XPlat Code Coverage"
+dotnet test tests/BudgetTracker.Test/BudgetTracker.Test.csproj --collect:"XPlat Code Coverage"
 ```
 
 ---

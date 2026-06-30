@@ -27,15 +27,15 @@ jobs:
 
     # Restore dependencies
     - name: Restore dependencies
-      run: dotnet restore BudgetTracker/BudgetTracker.sln
+      run: dotnet restore BudgetTracker.sln
 
     # Build project
     - name: Build
-      run: dotnet build BudgetTracker/BudgetTracker.sln --no-restore --configuration Release
+      run: dotnet build BudgetTracker.sln --no-restore --configuration Release
 
     # Run tests med coverage
     - name: Test with Coverage
-      run: dotnet test BudgetTracker/BudgetTracker.sln --no-build --configuration Release --collect:"XPlat Code Coverage" --logger "console;verbosity=detailed"
+      run: dotnet test BudgetTracker.sln --no-build --configuration Release --collect:"XPlat Code Coverage" --logger "console;verbosity=detailed"
 
     # Coverage summary
     - name: Code Coverage Summary
